@@ -23,15 +23,34 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="shader.h">
+    <ClInclude Include="include\mesh.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="camera.h">
+    <ClInclude Include="include\camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\model.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertex.txt" />
     <Text Include="fragment.txt" />
+    <Text Include="shaderFile\Fcube.txt" />
+    <Text Include="shaderFile\Flight.txt" />
+    <Text Include="shaderFile\Vcube.txt" />
+    <Text Include="shaderFile\Vlight.txt" />
+    <Text Include="shaderFile\Fmodel.txt" />
+    <Text Include="shaderFile\Vmodel.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
