@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ReferencePath>$(ReferencePath)</ReferencePath>
-    <LibraryPath>F:\OpenGLLibraries\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>F:\OpenGLLibraries\lib\;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>F:\OpenGLLibraries\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -113,7 +113,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,12 +137,25 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="camera.h" />
-    <ClInclude Include="shader.h" />
+    <ClInclude Include="include\camera.h" />
+    <ClInclude Include="include\mesh.h" />
+    <ClInclude Include="include\shader.h" />
+    <ClInclude Include="include\stb_image.h" />
+    <ClInclude Include="include\model.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fragment.txt" />
+    <Text Include="shaderFile\Fcube.txt" />
+    <Text Include="shaderFile\Flight.txt" />
+    <Text Include="shaderFile\Fmodel.txt" />
+    <Text Include="shaderFile\Vcube.txt" />
+    <Text Include="shaderFile\Vlight.txt" />
+    <Text Include="shaderFile\Vmodel.txt" />
     <Text Include="vertex.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

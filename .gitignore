@@ -1,6 +1,8 @@
 
 
-bin/
-obj/
-x64/
-.vs/
+/bin
+/obj
+/x64
+/.vs
+NewOpenGL.vcxproj.filters
+NewOpenGL.vcxproj.user
