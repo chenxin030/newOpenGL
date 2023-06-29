@@ -144,14 +144,14 @@
     <ClInclude Include="include\model.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="fragment.txt" />
+    <Text Include="shaderFile\FCommon.txt" />
     <Text Include="shaderFile\Fcube.txt" />
     <Text Include="shaderFile\Flight.txt" />
     <Text Include="shaderFile\Fmodel.txt" />
+    <Text Include="shaderFile\VCommon.txt" />
     <Text Include="shaderFile\Vcube.txt" />
     <Text Include="shaderFile\Vlight.txt" />
     <Text Include="shaderFile\Vmodel.txt" />
-    <Text Include="vertex.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
