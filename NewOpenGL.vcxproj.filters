@@ -40,20 +40,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="shaderFile\Fcube.txt" />
-    <Text Include="shaderFile\Flight.txt" />
-    <Text Include="shaderFile\Vcube.txt" />
-    <Text Include="shaderFile\Vlight.txt" />
-    <Text Include="shaderFile\Fmodel.txt" />
-    <Text Include="shaderFile\Vmodel.txt" />
-    <Text Include="shaderFile\FCommon.txt" />
-    <Text Include="shaderFile\VCommon.txt" />
-    <Text Include="shaderFile\Fquad.txt" />
-    <Text Include="shaderFile\Vquad.txt" />
-    <Text Include="shaderFile\Fcubemap.txt" />
-    <Text Include="shaderFile\Vcubemap.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include=".gitignore" />
     <None Include="README.md" />
   </ItemGroup>
