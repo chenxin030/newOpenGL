@@ -62,27 +62,7 @@ int main()
 
 	Shader shader("shaderFile//Vertex//14.Geometry.txt", "shaderFile//Fragment//14.Geometry.txt", "shaderFile//Geometry//14.Geometry.txt");
 
-	float points[] = {
-		-0.5f,  0.5f, 1.0f, 0.0f, 0.0f, // top-left
-		0.5f,  0.5f, 0.0f, 1.0f, 0.0f, // top-right
-		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, // bottom-right
-		-0.5f, -0.5f, 1.0f, 1.0f, 0.0f  // bottom-left
-	};
-
-
-	unsigned int VAO, VBO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glBindVertexArray(0);
+	Model nanosuit("resource/nanosuit/nanosuit.obj");
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -95,9 +75,18 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glBindVertexArray(VAO);
 		shader.use();
-		glDrawArrays(GL_POINTS, 0, 4);
+
+		glm::mat4 model = glm::mat4(1.0);
+		glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		shader.setMat4("model", model);
+		shader.setMat4("view", view);
+		shader.setMat4("projection", projection);
+
+		shader.setFloat("time", static_cast<float>(glfwGetTime()));
+
+		nanosuit.Draw(shader);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
