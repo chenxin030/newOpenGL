@@ -61,6 +61,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 
 	Shader shader("shaderFile//Vertex//14.Geometry.txt", "shaderFile//Fragment//14.Geometry.txt", "shaderFile//Geometry//14.Geometry.txt");
+	Shader modelShader("shaderFile//Vertex//Vmodel.txt", "shaderFile//Fragment//Fmodel.txt");
 
 	Model nanosuit("resource/nanosuit/nanosuit.obj");
 
@@ -75,16 +76,21 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shader.use();
-
 		glm::mat4 model = glm::mat4(1.0);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+		modelShader.use();
+		modelShader.setMat4("model", model);
+		modelShader.setMat4("view", view);
+		modelShader.setMat4("projection", projection);
+
+		nanosuit.Draw(modelShader);
+
+		shader.use();
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", projection);
-
-		shader.setFloat("time", static_cast<float>(glfwGetTime()));
 
 		nanosuit.Draw(shader);
 
