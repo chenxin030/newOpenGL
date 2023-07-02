@@ -32,6 +32,9 @@ float lastFrame = 0.0f; // 上一帧的时间
 
 unsigned int planeVAO;
 
+GLboolean parallax_mapping = true;
+GLfloat height_scale = 0.1;
+
 void renderScene(const Shader& shader);
 void renderCube();
 void renderQuad();
@@ -67,14 +70,16 @@ int main()
 
 	Shader shader("shaderFile//Vertex//20.NormalMap.vs.txt", "shaderFile//Fragment//20.NormalMap.fs.txt");
 
-	unsigned int diffuseMap = loadTexture("resource/texture/brickwall.jpg");
-	unsigned int normalMap = loadTexture("resource/texture/brickwall_normal.jpg");
+	unsigned int diffuseMap = loadTexture("resource/texture/bricks2.jpg");
+	unsigned int normalMap = loadTexture("resource/texture/bricks2_normal.jpg");
+	unsigned int heightMap = loadTexture("resource/texture/bricks2_disp.jpg");
 
 	glm::vec3 lightPos(0.5f, 1.0f, 0.3f);
 
 	shader.use();
 	shader.setInt("diffuseMap", 0);
 	shader.setInt("normalMap", 1);
+	shader.setInt("depthMap", 2);
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -87,23 +92,25 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// configure view/projection matrices
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		shader.use();
 		shader.setMat4("projection", projection);
 		shader.setMat4("view", view);
-
-		// render normal-mapped quad
+		// render parallax-mapped quad
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, glm::radians((float)glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0))); // rotate the quad to show normal mapping from multiple directions
+		model = glm::rotate(model, glm::radians((float)glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0))); // rotate the quad to show parallax mapping from multiple directions
 		shader.setMat4("model", model);
 		shader.setVec3("viewPos", camera.Position);
 		shader.setVec3("lightPos", lightPos);
+		shader.setFloat("heightScale", height_scale); // adjust with Q and E keys
+		std::cout << height_scale << std::endl;
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, normalMap);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, heightMap);
 		renderQuad();
 
 		model = glm::mat4(1.0f);
